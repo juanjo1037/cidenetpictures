@@ -1,0 +1,58 @@
+<!-- Template for the seat component -->
+<!-- Author: Uzair Ahmed -->
+<div class="container">
+  <main class="innerContainer">
+      <div class="movie">
+          <h3 class="movieTitle">{{movie.title}}</h3>
+          <div class="movieDetails">sala:{{idRoom}} - hora de funcion: {{schedule}} - duración:{{movie.duration}}</div>
+          <div class="legend">
+            <span class=" freeSeat"><mat-icon>event_seat</mat-icon></span> LIBRE
+            <span class=" reservedSeat padding-left"><mat-icon>event_seat</mat-icon></span> OCUPADO
+            <span class=" selectedSeat padding-left"><mat-icon>event_seat</mat-icon></span> SELECCIONADO
+        </div>
+      </div>
+
+      <!-- Showing a static legend bar -->
+
+
+
+
+
+      <!-- Generate the seating grid -->
+      <div *ngFor="let row of rows">
+          <span class="seat" *ngFor="let col of columns" [ngSwitch]="getStatus(row, col)">
+              <span *ngSwitchCase="'selected'" class="selectedSeat" (click)="seatClicked(row, col)"><mat-icon>event_seat</mat-icon></span>
+              <span *ngSwitchCase="'reserved'" class=" reservedSeat"><mat-icon>event_seat</mat-icon></span>
+              <span *ngSwitchDefault class="freeSeat" (click)="seatClicked(row, col)"><mat-icon>event_seat</mat-icon></span>
+          </span>
+      </div>
+      <div class="screen"><p class="font14 marginTop5">Pantalla</p></div>
+      <!-- Structural directive - only visible on selection -->
+      <div *ngIf="rowsSelected.length > 0 && columnsSelected.length>0" class="font14 marginTB10">
+          <div class="wordWrap">Asientos Reservados : {{rowsSelected.length}} (<span class="count"*ngFor="let sel of auxSelected">{{sel}} </span>)</div>
+          <div>PRECIO :{{price}} </div>
+
+      </div>
+      <hr>
+      <!-- Action buttons -->
+      <div class="buttonBar marginTop5">
+          <button (click)="clearSelected()" [disabled]="rowsSelected.length === 0" class="btn btn-default btn-sm">Limpiar</button>
+          <button  (click)="open(content)"  [disabled]="rowsSelected.length === 0" class="btn btn-success btn-sm">Guardar Reserva</button>
+      </div>
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h1 class="modal-title" id="modal-basic-title">Confirmar Reserva</h1>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         ¿Desea confirmar la reserva?
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success btn-md" (click)="onReserve()">Confirmar</button>
+          <button type="button" class="btn btn-secondary btn-md" aria-label="Close" (click)="d('Cross click')">Cancelar</button>
+        </div>
+      </ng-template>
+  </main>
+</div>

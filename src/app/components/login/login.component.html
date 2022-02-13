@@ -1,0 +1,84 @@
+<div class="wrapper">
+  <div class="header">
+    <div class="logo">
+      <a href="/"
+        ><img src="../../../assets/cidenetPicTransparent.png" alt="logo"
+      /></a>
+    </div>
+  </div>
+  <div class="login__body">
+    <div class="login__box">
+      <h2>Iniciar Sesión</h2>
+      <form [formGroup]="formLogin" (ngSubmit)="onLogin(formLogin.value)">
+        <div class="input__wrap">
+          <input
+            type="text"
+            placeholder="Email"
+            formControlName="email"
+            name="email"
+            class="form-control"
+            id="email"
+          />
+          <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <small class="form-text" *ngIf="email?.errors?.required">
+              Debe ingresar su correo electronico</small
+            >
+          </div>
+        </div>
+          <div class="input__wrap">
+            <input
+              type="password"
+              placeholder="Contraseña"
+              formControlName="password"
+              name="password"
+              class="form-control"
+            />
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+              <small class="form-text" *ngIf="password?.errors?.required">
+                Debe ingresar su contraseña</small
+              >
+            </div>
+          </div>
+          <div class="input__wrap">
+            <button type="submit" [disabled]="formLogin?.invalid">
+              Ingresar
+            </button>
+          </div>
+          <div class="support">
+            <div class="remember">
+              <span
+                ><input
+                  type="checkbox"
+                  style="margin: 0; padding: 0; height: 13px"
+              /></span>
+              <span>Recuerdame</span>
+            </div>
+          </div>
+          <div class="login__footer">
+            <div class="sign__up">
+              <p>
+                ¿Nuevo en Cidenet Pictures? <a (click)="open(content)" >Registrate ahora.</a>
+              </p>
+
+
+            </div>
+            <ng-template #content let-c="close" let-d="dismiss">
+              <div class="modal-header modal-custom">
+                <h2 class="modal-title" id="modal-basic-title">Registrate</h2>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body modal-custom">
+               <app-registration-form></app-registration-form>
+              </div>
+              <div class="modal-footer">
+
+              </div>
+            </ng-template>
+          </div>
+
+      </form>
+    </div>
+  </div>
+</div>

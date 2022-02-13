@@ -1,0 +1,74 @@
+<div class="container-custom">
+  <div class="header">
+    <div
+      class="header__main"
+      id="stickyHeader"
+      [class.sticky]="sticky"
+      #stickHeader
+    >
+      <div class="header__left">
+        <a routerLink="/">
+          <img src="../assets/cidenetPicTransparent.png" alt="logo" />
+        </a>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li class="active"><a>Cartelera</a></li>
+          <li *ngIf="isLogged"><a href="reservations">Mis Reservas</a></li>
+          <li *ngIf="isLogged && isAdmin">
+            <a href="movies-admin">Administrar peliculas</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="header__right">
+        <ul>
+          <li>
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Icon-button with a menu"
+            >
+              <mat-icon>account_circle</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <div class="menu__container">
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngIf="isLogged">
+                  <span>{{ email }}</span>
+                </button>
+
+                <button mat-menu-item>
+                  <mat-icon *ngIf="!isLogged">input</mat-icon>
+                  <span *ngIf="!isLogged" routerLink="/login"
+                    >Iniciar Sesión</span
+                  >
+                  <mat-icon *ngIf="isLogged">exit_to_app</mat-icon>
+                  <span *ngIf="isLogged" (click)="onLogOut()"
+                    >Cerrar sesión
+                  </span>
+                </button>
+              </mat-menu>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--HEADER MAIN ENDS HERE-->
+  </div>
+
+  <!-- espacio para filtros-->
+
+  <!-- listado de peliculas -->
+  <div class="body">
+    <h1>Nuestras Peliculas</h1>
+    <div class="card-container">
+      <div class="card" *ngFor="let movie of movies">
+        <img
+          src="{{ movie.image }}"
+          alt="{{ movie.title }}"
+          (click)="selectedMovie(movie.id)"
+        />
+      </div>
+    </div>
+  </div>
+</div>

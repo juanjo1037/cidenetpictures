@@ -1,0 +1,66 @@
+<div class="container-custom">
+
+  <div class="header">
+    <!--BANNER AREA-->
+    <div
+      class="header__banner"
+      [ngStyle]="{
+        'background-image':
+          'linear-gradient(rgba(19, 53, 80, 0.0),rgba(19, 53, 80, 0.0),rgba(19, 53, 80, 0.0),rgba(19, 53, 80, 0.3), rgba(19, 53, 80, 0.5), rgba(19, 53, 80, 1)) , url(' +
+          headerBGUrl +
+          ')'
+      }"
+    >
+      <h2>{{ reservation?.presentation.movie.title }}</h2>
+      <div class="header__buttons">
+        <button class="play-button"  (click)="open(content)">
+          <mat-icon>edit</mat-icon>
+          <span>Editar Reserva</span>
+        </button>
+  <button class="delete-button" placement="top" ngbTooltip="Eliminar Reserva" (click)="open(contents)">
+    <mat-icon>delete_outline</mat-icon>
+  </button>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header " style="margin-bottom:0;">
+      <h2 class="modal-title" style="margin-bottom:0;" id="modal-basic-title">Seleccion de asientos</h2>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-chair-reservation [idRoom]="reservation.presentation.id.roomId"[schedule]="reservation.presentation.id.schedule"[movie]="reservation.presentation.movie" [userId]="reservation.id.userId"></app-chair-reservation>
+    </div>
+
+  </ng-template>
+  <ng-template #contents let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h1 class="modal-title" id="modal-basic-title">Eliminar Reserva</h1>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     ¿Desea eliminar la reserva?
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success btn-md" (click)="deleteReservation()">Confirmar</button>
+      <button type="button" class="btn btn-secondary btn-md" aria-label="Close" (click)="d('Cross click')">Cancelar</button>
+    </div>
+  </ng-template>
+      </div>
+    </div>
+
+  </div>
+  <div class="body-detail row" >
+    <div class="movie-synopsis col-8">
+      <p>{{reservation.presentation.movie.synopsis}}</p>
+    </div>
+    <div class="reserve-detail col-4">
+     <p><span>Cantidad de asientos: </span>{{reservation.chairsNumber}}</p>
+     <p><span>Precio: </span>{{reservation.price}}</p>
+     <p><span>Sala: </span>{{reservation.presentation.id.roomId}}</p>
+     <p><span>Horario: </span>{{reservation.presentation.id.schedule}}</p>
+    </div>
+  </div>
+</div>

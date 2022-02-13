@@ -1,0 +1,99 @@
+<div class="container-custom">
+  <div
+    class="header__main"
+    id="stickyHeader"
+    [class.sticky]="sticky"
+    #stickHeader
+  >
+    <div class="header__left">
+      <a routerLink="/">
+        <img src="../assets/cidenetPicTransparent.png" alt="logo" />
+      </a>
+      <ul>
+        <li ><a href="">Inicio</a></li>
+        <li><a href="movies">Cartelera</a></li>
+        <li  *ngIf="isLogged"><a href="reservations">Mis Reservas</a></li>
+        <li *ngIf="isLogged && isAdmin" class="active">
+          <a href="movies-admin">Administrar peliculas</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="header__right">
+      <ul>
+        <li>
+          <a *ngIf="isAdmin">Bienvenido Admin</a
+          ><a *ngIf="!isAdmin">Bienvenido {{ email }}</a>
+        </li>
+        <li>
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Icon-button with a menu"
+          >
+            <mat-icon>account_circle</mat-icon>
+            <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+          <div class="menu__container">
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngIf="isLogged">
+                <span>{{ email }}</span>
+              </button>
+
+              <button mat-menu-item>
+                <mat-icon *ngIf="!isLogged">input</mat-icon>
+                <span *ngIf="!isLogged" routerLink="/login"
+                  >Iniciar Sesión</span
+                >
+                <mat-icon *ngIf="isLogged">exit_to_app</mat-icon>
+                <span *ngIf="isLogged" (click)="onLogOut()"
+                  >Cerrar sesión
+                </span>
+              </button>
+            </mat-menu>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="movies-table mt-5">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <div class="card">
+          <div class="card-body text-center">
+            <span class="title">LISTADO DE PELICULAS</span>
+            <button class="btn btn-success new-movie" routerLink='/create-movie'>Nuevo</button>
+            <table class="table table-striped mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">Titulo</th>
+                  <th scope="col">Géneros</th>
+                  <th scope="col">Duración</th>
+                  <th scope="col">Formato</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Cartelera</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let movie of movies">
+                  <td>{{movie.title}}</td>
+                  <td>{{movie.genre}}</td>
+                  <td>{{movie.duration}}</td>
+                  <td>{{movie.format}}</td>
+                  <td>{{movie.price}}</td>
+                  <td>{{movie.billboard}}</td>
+                  <td><i class="fas fa-edit text-primary"></i>
+                  <i class="fas fa-trash-alt text-danger"></i>
+
+                  </td>
+                </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

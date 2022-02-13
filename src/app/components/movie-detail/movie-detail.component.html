@@ -1,0 +1,124 @@
+
+<div class="body">
+  <div class="container-custom">
+
+    <div
+      class="header__main"
+      id="stickyHeader"
+      [class.sticky]="sticky"
+      #stickHeader>
+      <div class="header__left">
+        <a routerLink="/">
+          <img src="../assets/cidenetPicTransparent.png" alt="logo" />
+        </a>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="movies">Cartelera</a></li>
+          <li *ngIf="isLogged"><a href="reservations">Mis Reservas</a></li>
+          <li *ngIf="isLogged&&isAdmin"><a href="#">Administrar peliculas</a></li>
+        </ul>
+      </div>
+
+      <div class="header__right">
+        <ul>
+          <li>
+            <a *ngIf="isAdmin">Bienvenido Admin</a><a *ngIf="!isAdmin">Bienvenido
+              {{ email }}</a>
+          </li>
+          <li>
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Icon-button with a menu">
+              <mat-icon>account_circle</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <div class="menu__container">
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngIf="isLogged">
+                  <span>{{ email }}</span>
+                </button>
+
+                <button mat-menu-item>
+                  <mat-icon *ngIf="!isLogged">input</mat-icon>
+                  <span *ngIf="!isLogged" routerLink="/login">Iniciar Sesión</span>
+                  <mat-icon *ngIf="isLogged">exit_to_app</mat-icon>
+                  <span *ngIf="isLogged" (click)="onLogOut()">Cerrar sesión
+                  </span>
+                </button>
+              </mat-menu>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <!-- [ngStyle]="{
+    'background-image':
+      'linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url(' +
+      headerBGUrl +
+      ')'
+  }" -->
+  <div
+  class="banner"
+  [ngStyle]="{
+    'background-image':
+      'linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url(' +
+      headerBGUrl +
+      ')'
+  }"
+  ></div>
+  <div class="mb-3 movie-content container">
+  <div class="movie-content__poster">
+    <div
+      class="movie-content__poster__img"
+      [ngStyle]="{
+        'background-image':
+          'url(' +
+          posterBGUrl +
+          ')'
+      }"></div>
+  </div>
+  <div class="movie-content__info">
+    <h1 class="title">{{movie.title}}</h1>
+    <div class="movie__info">
+      <span class="gender__item">{{movie.genre}}</span>
+      <span class="format__item">{{movie.format}}</span>
+      <span class="duration__item">{{movie.duration}}</span>
+    </div>
+    <div class="synopsis">{{movie.synopsis}}</div>
+    <div class="ticketValue">
+      <!--TODO: buscar funcion que le de formato al precio-->
+      Valor de la boleta: {{movie.price}} COP
+    </div>
+    <div class="button_dropdown">
+      <h2 *ngIf="!presentationsIsEmpty()&&isLogged "><i> Esta pelicula no tiene presentaciones</i></h2>
+      <h2 *ngIf="!isLogged"><i> Debes iniciar sesión para reservar peliculas</i></h2>
+      <select class="schedule_" id="schedule" required="true" *ngIf="presentationsIsEmpty()&&isLogged">
+        <option selected disabled>
+          Horarios Disponibles
+        </option>
+        <option *ngFor="let pres of presentations"
+        (click)="onSelect(pres.id.schedule, pres.id.roomId)">{{pres.id.schedule}}</option>
+
+      </select>
+      <button *ngIf="presentationsIsEmpty()&& isLogged" class="reservation__button" (click)=open(content)>Reservar</button>
+
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header " style="margin-bottom:0;">
+          <h2 class="modal-title" style="margin-bottom:0;" id="modal-basic-title">Seleccion de asientos</h2>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-chair-reservation [idRoom]="roomId"[schedule]="schedule"[movie]="movie"></app-chair-reservation>
+        </div>
+
+      </ng-template>
+
+  </div>
+  </div>
+
+  </div>
+  </div>

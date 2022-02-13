@@ -1,0 +1,98 @@
+<div class="container-custom">
+  <div
+    class="header__main"
+    id="stickyHeader"
+    [class.sticky]="sticky"
+    #stickHeader
+  >
+    <div class="header__left">
+      <a routerLink="/">
+        <img src="../assets/cidenetPicTransparent.png" alt="logo" />
+      </a>
+      <ul>
+        <li ><a href="">Inicio</a></li>
+        <li><a href="movies">Cartelera</a></li>
+        <li class="active" *ngIf="isLogged"><a href="#">Mis Reservas</a></li>
+        <li *ngIf="isLogged && isAdmin">
+          <a href="movies-admin">Administrar peliculas</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="header__right">
+      <ul>
+        <li>
+          <a *ngIf="isAdmin">Bienvenido Admin</a
+          ><a *ngIf="!isAdmin">Bienvenido {{ email }}</a>
+        </li>
+        <li>
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Icon-button with a menu"
+          >
+            <mat-icon>account_circle</mat-icon>
+            <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+          <div class="menu__container">
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngIf="isLogged">
+                <span>{{ email }}</span>
+              </button>
+
+              <button mat-menu-item>
+                <mat-icon *ngIf="!isLogged">input</mat-icon>
+                <span *ngIf="!isLogged" routerLink="/login"
+                  >Iniciar Sesión</span
+                >
+                <mat-icon *ngIf="isLogged">exit_to_app</mat-icon>
+                <span *ngIf="isLogged" (click)="onLogOut()"
+                  >Cerrar sesión
+                </span>
+              </button>
+            </mat-menu>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="empty-message" *ngIf="reservationIsEmpty()">
+      <h2>Aún no has hecho ninguna reserva, te invitamos a que revises nuestra <a href="movies">cartelera</a></h2>
+    </div>
+    <div class="container__card" *ngIf=" !reservationIsEmpty()">
+      <h2>Tu historial de reservas</h2>
+      <div class="card" *ngFor="let reservation of reservations">
+        <div class="poster">
+          <img
+            src="{{ reservation.presentation.movie.image }}"
+            alt="{{ reservation.presentation.movie.title }}"
+          />
+        </div>
+
+        <div class="info__description">
+          <h3>{{ reservation.presentation.movie.title }}</h3>
+          <p><b>Número de asientos:</b> {{ reservation.chairsNumber }}</p>
+          <p>
+            <b>Precio: </b>{{ reservation.price
+            }}<i style="color: #13355000"> --- </i> <b>Sala:</b>
+            {{ reservation.id.presentationRoomId }}
+          </p>
+          <p class="schedule">
+            <b>Horario:</b> {{ reservation.presentation.id.schedule }}
+          </p>
+          <button  (click)="open(content)"  placement="right" ngbTooltip="Mas detalles"><mat-icon>search</mat-icon>  </button>
+        </div>
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-body">
+            <button type="button" class="button-close" (click)="d('Cross click')">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <app-reservation-detail [reservation]="reservation"></app-reservation-detail>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
