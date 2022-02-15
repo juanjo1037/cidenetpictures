@@ -51,4 +51,9 @@ export class ReserveComponent implements OnInit {
       this.sticky = false;
     }
   }
+  onLogOut():void{
+    this.tokenService.logOut();
+    window.location.reload();
+
+  }
 }

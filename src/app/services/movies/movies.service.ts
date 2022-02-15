@@ -56,4 +56,15 @@ export class MoviesService {
     }
     return this.http.get<Movies[]>(address, options);
   }
+  deleteMovie(id :number): Observable<any>{
+    let address = this.url+"movie/"+id;
+    let options= {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+
+    }
+    return this.http.delete<any>(address,options);
+
+  }
 }

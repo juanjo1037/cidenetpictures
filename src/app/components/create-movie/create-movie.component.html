@@ -1,0 +1,214 @@
+<form [formGroup]="formMovie" >
+  <div class="container">
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <ng-select
+            [items]="genres"
+            bindLabel="genre"
+            placeholder="Selecciona los géneros"
+            appendTo="body"
+            [multiple]="true"
+            [(ngModel)]="selected"
+            formControlName="genre"
+          >
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="number"
+            class="form-control"
+            name="document"
+            id="document"
+            placeholder="Documento"
+            formControlName="document"
+          />
+
+          <div
+            *ngIf="title?.invalid && (title?.dirty || title?.touched)"
+          >
+            <small
+              class="form-text text-muted"
+              *ngIf="document?.errors?.required"
+            >
+              Documento es requerido</small
+            >
+
+            <small
+              class="form-text text-muted"
+              *ngIf="document?.errors?.pattern"
+            >
+              Debe contener una longitud mínima de 6 números y un máximo de 12
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            placeholder="Nombre"
+            formControlName="firstName"
+          />
+
+          <div
+            *ngIf="
+            title?.invalid && (title?.dirty || title?.touched)
+            "
+          >
+            <small
+              class="form-text text-muted"
+              *ngIf="firstName?.errors?.required"
+            >
+              Debes ingresar tu nombre</small
+            >
+
+            <small
+              class="form-text text-muted"
+              *ngIf="firstName?.errors?.pattern"
+            >
+              Solo puede contener letras
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            placeholder="Apellido"
+            formControlName="lastName"
+          />
+
+          <div
+            *ngIf="title?.invalid && (title?.dirty || title?.touched)"
+          >
+            <small
+              class="form-text text-muted"
+              *ngIf="lastName?.errors?.required"
+            >
+              Debes ingresar tu apellido</small
+            >
+
+            <small
+              class="form-text text-muted"
+              *ngIf="lastName?.errors?.pattern"
+            >
+              Solo puede contener letras
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Email"
+            formControlName="email"
+          />
+          <div *ngIf="title?.invalid && (title?.dirty || title?.touched)">
+            <small class="form-text text-muted" *ngIf="email?.errors?.required">
+              Email es requerido</small
+            >
+            <small class="form-text text-muted" *ngIf="email?.errors?.pattern">
+              El email introducido no es valido
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <div
+            *ngIf="title?.invalid && (title?.dirty || title?.touched)"
+          >
+            <small
+              class="form-text text-muted"
+              *ngIf="password?.errors?.pattern"
+            >
+              Debe contener una longitud de 5 caracteres, una letra minuscula,
+              una mayuscula y un numero
+            </small>
+            <small
+              class="form-text text-muted"
+              *ngIf="password?.errors?.required"
+            >
+              Debe introducir una contraseña</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group padd">
+          <input
+            type="password"
+            class="form-control"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+          />
+          <div
+            *ngIf="
+            title?.invalid &&
+              (title?.dirty || title?.touched)
+            "
+          >
+            <small
+              class="form-text text-muted"
+              *ngIf="confirmPassword?.errors?.required"
+            >
+              Debe confirmar su contraseña
+            </small>
+            <small
+              class="form-text text-muted"
+              *ngIf="confirmPassword?.errors?.MustMatch"
+            >
+              Las contraseñas no coinciden
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+  </div>
+  <button
+    class="btn btn-primary mt-2"
+    type="submit"
+    data-dismiss="modal"
+    [disabled]="formMovie.invalid"
+  >
+    <i class="fas fa-sign-in-alt"></i> Registrarse
+  </button>
+</form>

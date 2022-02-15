@@ -14,7 +14,14 @@
         <li><a href="movies">Cartelera</a></li>
         <li class="active" *ngIf="isLogged"><a href="#">Mis Reservas</a></li>
         <li *ngIf="isLogged && isAdmin">
-          <a href="movies-admin">Administrar peliculas</a>
+          <div ngbDropdown class="d-inline-block ">
+            <a  id="dropdownBasic1" ngbDropdownToggle>Administrar</a>
+            <div ngbDropdownMenu class ="custom-dropdown" aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem ><a href="movies-admin">Peliculas</a> </button>
+              <button ngbDropdownItem>Presentaciones</button>
+              <button ngbDropdownItem>Salas</button>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -59,6 +66,9 @@
 
   <div class="body">
     <div class="empty-message" *ngIf="reservationIsEmpty()">
+
+      <img src="../assets/cidenetPicTransparent.png" alt="logo" />
+
       <h2>Aún no has hecho ninguna reserva, te invitamos a que revises nuestra <a href="movies">cartelera</a></h2>
     </div>
     <div class="container__card" *ngIf=" !reservationIsEmpty()">

@@ -135,3 +135,37 @@
   position: relative;
   left: 22vw;
 }
+.custom-dropdown{
+  background-color: #012a4a;
+button{
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  &:hover{
+    background-color: #012a4a;
+    color: #a4a4a4;
+  }
+}
+
+}
+
+td{
+  mat-icon{
+    cursor: pointer;
+  }
+
+}
+.edit{
+  color: #28a745;
+  &:hover{
+    color: #1f8036;
+  }
+}
+.delete{
+  color: rgb(201, 30, 30);
+  &:hover{
+    color: rgb(150, 24, 24);
+  }
+}

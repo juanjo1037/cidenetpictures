@@ -67,7 +67,25 @@
       }
     }
   }
+  .custom-dropdown{
+    background-color: #012a4a;
 
+  button{
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial,
+      sans-serif;
+    &:hover{
+      background-color: #012a4a;
+      color: #a4a4a4;
+    }
+    a{
+      color:#fff;
+    }
+  }
+
+  }
   .header__right ul {
     flex: 1;
     margin-right: 20px;
@@ -125,6 +143,14 @@
       align-items: center;
       height: 300px;
       color: #a4a4a4;
+      position: relative;
+      top: 75px;
+      img{
+      width: 250px;
+      position: relative;
+      bottom: 75px;
+
+      }
     }
   }
 

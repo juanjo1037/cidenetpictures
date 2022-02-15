@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +26,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ReserveComponent } from './components/reserve/reserve.component';
 import { ReservationDetailComponent } from './components/reservation-detail/reservation-detail.component';
 import {MatTooltipModule } from '@angular/material/tooltip';
+import { CreateMovieComponent } from './components/create-movie/create-movie.component';
+import { NgSelectModule } from "@ng-select/ng-select";
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import {MatTooltipModule } from '@angular/material/tooltip';
     AdminMoviesComponent,
     AdminPresentationsComponent,
     ReserveComponent,
-    ReservationDetailComponent
+    ReservationDetailComponent,
+    CreateMovieComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import {MatTooltipModule } from '@angular/material/tooltip';
     FormsModule,
     MatMenuModule,
     NgbModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    NgSelectModule
 
 
 

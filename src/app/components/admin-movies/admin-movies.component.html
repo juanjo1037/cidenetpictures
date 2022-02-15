@@ -14,8 +14,16 @@
         <li><a href="movies">Cartelera</a></li>
         <li  *ngIf="isLogged"><a href="reservations">Mis Reservas</a></li>
         <li *ngIf="isLogged && isAdmin" class="active">
-          <a href="movies-admin">Administrar peliculas</a>
+          <div ngbDropdown class="d-inline-block ">
+            <a  id="dropdownBasic1" ngbDropdownToggle>Administrar</a>
+            <div ngbDropdownMenu class ="custom-dropdown" aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem>Peliculas</button>
+              <button ngbDropdownItem>Presentaciones</button>
+              <button ngbDropdownItem>Salas</button>
+            </div>
+          </div>
         </li>
+
       </ul>
     </div>
 
@@ -30,6 +38,7 @@
             mat-icon-button
             [matMenuTriggerFor]="menu"
             aria-label="Icon-button with a menu"
+
           >
             <mat-icon>account_circle</mat-icon>
             <mat-icon>arrow_drop_down</mat-icon>
@@ -63,6 +72,7 @@
           <div class="card-body text-center">
             <span class="title">LISTADO DE PELICULAS</span>
             <button class="btn btn-success new-movie" routerLink='/create-movie'>Nuevo</button>
+
             <table class="table table-striped mt-4">
               <thead>
                 <tr>
@@ -72,7 +82,8 @@
                   <th scope="col">Formato</th>
                   <th scope="col">Precio</th>
                   <th scope="col">Cartelera</th>
-                  <th scope="col"></th>
+                  <th scope="col">Editar</th>
+                  <th scope="col">Borrar</th>
                 </tr>
               </thead>
               <tbody>
@@ -83,15 +94,31 @@
                   <td>{{movie.format}}</td>
                   <td>{{movie.price}}</td>
                   <td>{{movie.billboard}}</td>
-                  <td><i class="fas fa-edit text-primary"></i>
-                  <i class="fas fa-trash-alt text-danger"></i>
+                  <td class="edit"><mat-icon>edit</mat-icon></td>
+                  <td class="delete" (click)="open(content)"><mat-icon>delete</mat-icon></td>
 
-                  </td>
+
+                  <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h1 class="modal-title" id="modal-basic-title">Eliminar Pelicula</h1>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     ¿Seguro que quiere eliminar la pelicula?
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-success btn-md" (click)="onDelete(movie.id)">Confirmar</button>
+                      <button type="button" class="btn btn-secondary btn-md" aria-label="Close" (click)="d('Cross click')">Cancelar</button>
+                    </div>
+                  </ng-template>
                 </tr>
 
 
               </tbody>
             </table>
+
           </div>
         </div>
       </div>

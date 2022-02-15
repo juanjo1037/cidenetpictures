@@ -37,8 +37,17 @@
         <ul>
           <li class="active"><a href="#">Inicio</a></li>
           <li><a href="movies">Cartelera</a></li>
-          <li *ngIf="isLogged"><a href="reservations  ">Mis Reservas</a></li>
-          <li *ngIf="isLogged&&isAdmin"><a href="movies-admin">Administrar peliculas</a></li>
+          <li *ngIf="isLogged"><a routerLink="/reservations">Mis Reservas</a></li>
+          <li *ngIf="isLogged&&isAdmin">
+            <div ngbDropdown class="d-inline-block ">
+            <a  id="dropdownBasic1" ngbDropdownToggle>Administrar</a>
+            <div ngbDropdownMenu class ="custom-dropdown" aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem routerLink="/movies-admin">Peliculas</button>
+              <button ngbDropdownItem>Presentaciones</button>
+              <button ngbDropdownItem>Salas</button>
+            </div>
+          </div>
+        </li>
         </ul>
       </div>
 
