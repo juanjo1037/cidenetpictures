@@ -26,6 +26,7 @@
     "@sweetalert2/ngx-sweetalert2": "^10.0.0",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
+    "ngx-select-ex": "^8.0.1",
     "ngx-slick-carousel": "^0.5.1",
     "rxjs": "~6.6.0",
     "slick-carousel": "^1.8.1",

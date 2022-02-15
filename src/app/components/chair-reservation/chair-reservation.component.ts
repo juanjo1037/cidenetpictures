@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/services/api/api.service';
 import { TokenService } from 'src/app/services/token/token.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chair-reservation',
@@ -29,7 +30,10 @@ export class ChairReservationComponent implements OnInit {
   @Input() userId:number;
   price:number;
 
-  constructor(private apiService:ApiService, private tokenService:TokenService, private modal:NgbModal) { }
+  constructor(private apiService:ApiService,
+     private tokenService:TokenService,
+     private modal:NgbModal,
+     private router:Router) { }
 
   ngOnInit(): void {
     this.subs.push(this.apiService.getChairsByRoom(this.idRoom).subscribe(data =>{
@@ -133,8 +137,11 @@ if(this.userId!=null){
   this.subs.push(
     this.apiService.updateReservation(reserve).subscribe(
       (data)=>{
+
         console.log(data);
       },(err)=>{
+        this.router.navigateByUrl('/RefrshComponent',
+        {skipLocationChange: true}).then(()=> this.router.navigate(["reservations"]));
         this.alertSuccess(err.error.text);
         this.closeModal();
       }
@@ -144,6 +151,7 @@ if(this.userId!=null){
   this.subs.push(
     this.apiService.createReservation(reserve).subscribe(
       (data) => {
+
         console.log(data);
       }, (err)=>{
         this.closeModal();

@@ -27,7 +27,7 @@ import { ReserveComponent } from './components/reserve/reserve.component';
 import { ReservationDetailComponent } from './components/reservation-detail/reservation-detail.component';
 import {MatTooltipModule } from '@angular/material/tooltip';
 import { CreateMovieComponent } from './components/create-movie/create-movie.component';
-
+import { NgxSelectModule } from 'ngx-select-ex';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +60,7 @@ import { CreateMovieComponent } from './components/create-movie/create-movie.com
     MatMenuModule,
     NgbModule,
     SweetAlert2Module.forRoot(),
+    NgxSelectModule
 
 
 
