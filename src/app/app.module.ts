@@ -27,7 +27,7 @@ import { ReserveComponent } from './components/reserve/reserve.component';
 import { ReservationDetailComponent } from './components/reservation-detail/reservation-detail.component';
 import {MatTooltipModule } from '@angular/material/tooltip';
 import { CreateMovieComponent } from './components/create-movie/create-movie.component';
-import { NgSelectModule } from "@ng-select/ng-select";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,14 +53,14 @@ import { NgSelectModule } from "@ng-select/ng-select";
     MatTooltipModule,
     SlickCarouselModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     MaterialExampleModule,
     MatNativeDateModule,
-    FormsModule,
     MatMenuModule,
     NgbModule,
     SweetAlert2Module.forRoot(),
-    NgSelectModule
+
 
 
 
