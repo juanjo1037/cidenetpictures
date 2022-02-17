@@ -1,0 +1,296 @@
+<div
+  class="header__main"
+  id="stickyHeader"
+  [class.sticky]="sticky"
+  #stickHeader
+>
+  <div class="header__left">
+    <a routerLink="/">
+      <img src="../assets/cidenetPicTransparent.png" alt="logo" />
+    </a>
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="movies">Peliculas</a></li>
+      <li *ngIf="isLogged"><a routerLink="/reservations">Mis Reservas</a></li>
+      <li *ngIf="isLogged && isAdmin" class="active">
+        <div ngbDropdown class="d-inline-block">
+          <a id="dropdownBasic1" ngbDropdownToggle>Administrar</a>
+          <div
+            ngbDropdownMenu
+            class="custom-dropdown"
+            aria-labelledby="dropdownBasic1"
+          >
+            <button ngbDropdownItem routerLink="/movies-admin">
+              Peliculas
+            </button>
+            <button ngbDropdownItem>Presentaciones</button>
+            <button ngbDropdownItem>Salas</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="header__right">
+    <ul>
+      <li>
+        <a *ngIf="isAdmin">Bienvenido Admin</a
+        ><a *ngIf="!isAdmin">Bienvenido {{ email }}</a>
+      </li>
+      <li>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Icon-button with a menu"
+        >
+          <mat-icon>account_circle</mat-icon>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <div class="menu__container">
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="isLogged">
+              <span>{{ email }}</span>
+            </button>
+
+            <button mat-menu-item>
+              <mat-icon *ngIf="!isLogged">input</mat-icon>
+              <span *ngIf="!isLogged" routerLink="/login">Iniciar Sesión</span>
+              <mat-icon *ngIf="isLogged">exit_to_app</mat-icon>
+              <span *ngIf="isLogged" (click)="onLogOut()">Cerrar sesión </span>
+            </button>
+          </mat-menu>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container mt-5 form">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <h2 class="title">EDITAR PELICULA</h2>
+          <form
+            class="mt-4"
+            [formGroup]="movieForm"
+            (ngSubmit)="onEdit(movieForm.value)"
+          >
+            <div class="mb-3">
+              <input
+                type="text"
+                formControlName="title"
+                class="form-control form-control-md"
+                placeholder="Titulo"
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  movieForm.get('title')?.hasError('required') &&
+                  movieForm.get('title')?.touched
+                "
+              >
+                <span
+                  >El titulo de la pelicula es
+                  <strong>Obligatorio</strong></span
+                >
+              </div>
+            </div>
+            <div class="mb-3">
+              <ng-multiselect-dropdown
+                [placeholder]="'Selecciona los géneros'"
+                [settings]="dropdownSettings"
+                [data]="genresList"
+                formControlName="genre"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onItemDeSelect($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                formControlName="duration"
+                class="form-control form-control-md"
+                placeholder="Duración en hh:mm:ss"
+                id="duration"
+                name="durarion"
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  movieForm.get('duration')?.hasError('required') &&
+                  movieForm.get('duration')?.touched
+                "
+              >
+                <span
+                  >La duración de la pelicula <strong>Obligatoria</strong></span
+                >
+              </div>
+              <div class="text-danger" *ngIf="duration?.errors?.pattern">
+                <span
+                  >La duración de la pelicula debe tener el formato
+                  <strong>hh:mm:ss</strong></span
+                >
+              </div>
+            </div>
+            <div class="mb-3">
+              <select
+                id="format"
+                class="form-control"
+                name="format"
+                placeholder="Formato"
+                formControlName="format"
+              >
+                <option selected disabled value="">
+                  Selecciona el formato
+                </option>
+                <option value="2D">2D</option>
+                <option value="3D">3D</option>
+                <option value="Animación">Animación</option>
+                <option value="Animación 3D">Animación 3D</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <textarea
+                type="text"
+                formControlName="synopsis"
+                class="form-control"
+                placeholder="Sinopsis"
+                id="synopsis"
+                name="synopsis"
+                minlength="20"
+                maxlength="500"
+              ></textarea>
+              <div class="text-danger">
+                <span *ngIf="synopsis?.errors?.required && synopsis?.touched">
+                  La sipnosis de la pelicula es <strong>obligatoria</strong>
+                </span>
+                <div class="text-danger" *ngIf="synopsis?.errors?.pattern">
+                  <span>
+                    La sipnosis debe tener un tamaño minimo de 20 carácteres y
+                    un máximo de 500
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input
+                type="number"
+                formControlName="price"
+                class="form-control form-control-md"
+                placeholder="Precio"
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  movieForm.get('price')?.hasError('required') &&
+                  movieForm.get('price')?.touched
+                "
+              >
+                <span
+                  >El precio de la reserva es <strong>Obligatorio</strong></span
+                >
+              </div>
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                formControlName="image"
+                class="form-control form-control-md"
+                placeholder="Url de la imagen"
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  movieForm.get('image')?.hasError('required') &&
+                  movieForm.get('image')?.touched
+                "
+              >
+                <span
+                  >La Url de la imagen de la pelicula es
+                  <strong>Obligatoria</strong></span
+                >
+              </div>
+              <div class="text-danger" *ngIf="image?.errors?.pattern">
+                <span
+                  >Debe de tener un formato de URL(http://www.dominio.com)</span
+                >
+              </div>
+            </div>
+            <div class="mb-3">
+              <input
+                type="text"
+                formControlName="backDropImg"
+                class="form-control form-control-md"
+                placeholder="Url de la imagen de fondo"
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  movieForm.get('backDropImg')?.hasError('required') &&
+                  movieForm.get('backDropImg')?.touched
+                "
+              >
+                <span
+                  >La Url de la imagen de fondo de la pelicula es
+                  <strong>Obligatoria</strong></span
+                >
+              </div>
+              <div class="text-danger" *ngIf="backDropImg?.errors?.pattern">
+                <span
+                  >Debe de tener un formato de URL(http://www.dominio.com)</span
+                >
+              </div>
+            </div>
+            <div class="mb-3 radios">
+              <h3>Elige una categoría</h3>
+              <div class="form-check">
+                <input
+                  checked
+                  class="form-check-input"
+                  type="radio"
+                  name="category"
+                  id="billboard"
+                  value="billboard"
+                  formControlName="category"
+                />
+                <label class="form-check-label" for="billboard">
+                  Cartelera
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="category"
+                  id="comingSoon"
+                  value="comingSoon"
+                  formControlName="category"
+                />
+                <label class="form-check-label" for="category">
+                  Proximamente
+                </label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <button
+                routerLink="/movies-admin"
+                class="btn btn-secondary btn-lg float-start"
+              >
+                ATRAS
+              </button>
+              <button
+                type="submit"
+                class="btn btn-success btn-lg float-end ml-1"
+                [disabled]="movieForm.invalid"
+              >
+                ACEPTAR
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

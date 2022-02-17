@@ -11,7 +11,7 @@
       </a>
       <ul>
         <li ><a href="">Inicio</a></li>
-        <li><a href="movies">Cartelera</a></li>
+        <li><a href="movies">Peliculas</a></li>
         <li  *ngIf="isLogged"><a href="reservations">Mis Reservas</a></li>
         <li *ngIf="isLogged && isAdmin" class="active">
           <div ngbDropdown class="d-inline-block ">
@@ -66,12 +66,12 @@
     </div>
   </div>
   <div class="movies-table mt-5">
-    <div class="row">
+    <div class="row" style="margin-left: -80px;">
       <div class="col-lg-8 offset-lg-2">
-        <div class="card">
+        <div class="card" style="width: 1000px;">
           <div class="card-body text-center">
             <span class="title">LISTADO DE PELICULAS</span>
-            <button class="btn btn-success new-movie" routerLink='/create-movie'>Nuevo</button>
+            <button class="btn btn-success new-movie" routerLink='/create-movies'>Nuevo</button>
 
             <table class="table table-striped mt-4">
               <thead>
@@ -82,6 +82,7 @@
                   <th scope="col">Formato</th>
                   <th scope="col">Precio</th>
                   <th scope="col">Cartelera</th>
+                  <th scope="col">Proximamente</th>
                   <th scope="col">Editar</th>
                   <th scope="col">Borrar</th>
                 </tr>
@@ -94,7 +95,8 @@
                   <td>{{movie.format}}</td>
                   <td>{{movie.price}}</td>
                   <td>{{movie.billboard}}</td>
-                  <td class="edit"><mat-icon>edit</mat-icon></td>
+                  <td>{{movie.comingSoon}}</td>
+                  <td class="edit"><mat-icon (click)="selectedMovie(movie.id)">edit</mat-icon></td>
                   <td class="delete" (click)="open(content)"><mat-icon>delete</mat-icon></td>
 
 

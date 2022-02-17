@@ -26,6 +26,16 @@ export class MoviesService {
     }
     return this.http.get<Movies[]>(address, options);
   }
+  getMoviesComingSoon():Observable<Movies[]>
+  {
+    let address= this.url+"movie/coming_soon"
+    let options={
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    }
+    return this.http.get<Movies[]>(address, options);
+  }
   getMoviesByGenre(genre:string):Observable<Movies[]>
   {
     let address= this.url+"movie/list"
@@ -66,5 +76,11 @@ export class MoviesService {
     }
     return this.http.delete<any>(address,options);
 
+  }
+  createMovie(movieForm:Movies):Observable<any>{
+    return this.http.post<any>(this.url+'movie',movieForm);
+  }
+  updateMovie(movieForm:Movies,id:number):Observable<any>{
+    return this.http.put<any>(this.url+'movie/'+id , movieForm);
   }
 }

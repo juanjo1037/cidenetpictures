@@ -1,6 +1,4 @@
-.container-custom {
-  display: flex;
-  flex-direction: column;
+
   .header__main {
     display: flex;
     padding: 20px;
@@ -90,13 +88,6 @@
     &::-webkit-scrollbar {
       display: none;
     }
-    .empty-message {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 300px;
-      color: #a4a4a4;
-    }
   }
 
   ul {
@@ -122,50 +113,36 @@
       }
     }
   }
-}
-.movies-table{
-  position: relative;
-  top: 80px;
-}
-.title{
-  position: relative;
-  left: 5px;
-}
-.new-movie{
-  position: relative;
-  left: 28vw;
-}
-.custom-dropdown{
-  background-color: #012a4a;
-button{
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-  &:hover{
+  .custom-dropdown {
     background-color: #012a4a;
-    color: #a4a4a4;
+    button {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+      &:hover {
+        background-color: #012a4a;
+        color: #a4a4a4;
+      }
+    }
   }
-}
 
+.form{
+  position: relative;
+  top: 70px;
 }
-
-td{
-  mat-icon{
-    cursor: pointer;
-  }
-
-}
-.edit{
-  color: #28a745;
-  &:hover{
-    color: #1f8036;
-  }
-}
-.delete{
-  color: rgb(201, 30, 30);
-  &:hover{
-    color: rgb(150, 24, 24);
+.radios{
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  align-items: flex-start;
+  border: 1px solid #d4d9de;
+  padding: 5px;
+  h3{
+    margin-bottom: -1px;
+    color: #788188;
+    font-size: 1rem;
+    font-weight: 400;
   }
 }

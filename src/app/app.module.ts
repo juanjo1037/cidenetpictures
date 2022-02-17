@@ -27,7 +27,8 @@ import { ReserveComponent } from './components/reserve/reserve.component';
 import { ReservationDetailComponent } from './components/reservation-detail/reservation-detail.component';
 import {MatTooltipModule } from '@angular/material/tooltip';
 import { CreateMovieComponent } from './components/create-movie/create-movie.component';
-import { NgxSelectModule } from 'ngx-select-ex';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { NgxSelectModule } from 'ngx-select-ex';
     AdminPresentationsComponent,
     ReserveComponent,
     ReservationDetailComponent,
-    CreateMovieComponent
+    CreateMovieComponent,
+    EditMovieComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,9 @@ import { NgxSelectModule } from 'ngx-select-ex';
     MatMenuModule,
     NgbModule,
     SweetAlert2Module.forRoot(),
-    NgxSelectModule
+    NgMultiSelectDropDownModule.forRoot()
+
+
 
 
 

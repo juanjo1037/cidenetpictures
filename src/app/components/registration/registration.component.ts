@@ -101,7 +101,8 @@ alertSuccess(){
     title: 'Cuenta creada',
     text: 'La cuenta ha sido creada con éxito',
     icon: 'success',
-    confirmButtonText: 'Confirmar'
+    confirmButtonText: 'Confirmar',
+    confirmButtonColor: '#012a4a'
   })
 }
 alertError(message:string){
@@ -109,7 +110,8 @@ alertError(message:string){
     title: 'Error al crear cuenta',
     text: message,
     icon: 'error',
-    confirmButtonText: 'Cool'
+    confirmButtonText: 'Confimar',
+    confirmButtonColor: '#012a4a'
   })
 }
   get documentType() {

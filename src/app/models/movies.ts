@@ -9,4 +9,5 @@ export interface Movies {
   price: number;
   billboard: boolean;
   backDropImg: string;
+  comingSoon: boolean;
 }

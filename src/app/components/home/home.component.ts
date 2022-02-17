@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
       this.billboard = data;
       this.headerBGUrl = this.billboard[0].backDropImg;
     }));
-    this.subs.push(this.movie.getMoviesByGenre("accion").subscribe(data => this.comingSoon = data));
+    this.subs.push(this.movie.getMoviesComingSoon().subscribe(data => this.comingSoon = data));
     this.subs.push(this.movie.getMoviesByGenre("comedia").subscribe(data => this.topRated = data));
 
 

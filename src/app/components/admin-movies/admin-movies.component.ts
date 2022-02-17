@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Movies } from 'src/app/models/movies';
@@ -21,7 +22,9 @@ movies:Movies[]=[];
 subs: Subscription[] = [];
 @ViewChild('stickHeader') header: ElementRef;
   constructor(private tokenService:TokenService,
-    private movieService:MoviesService, private modal:NgbModal) { }
+    private movieService:MoviesService,
+    private modal:NgbModal,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.email=this.tokenService.getEmail();
@@ -43,6 +46,9 @@ subs: Subscription[] = [];
     } else {
       this.sticky = false;
     }
+  }
+  selectedMovie(id: number) {
+    this.router.navigate(['/edit-movie', id]);
   }
   onLogOut():void{
     this.tokenService.logOut();

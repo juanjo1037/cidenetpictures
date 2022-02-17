@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AppComponent} from './app.component';
 import { AdminMoviesComponent } from './components/admin-movies/admin-movies.component';
+import { CreateMovieComponent } from './components/create-movie/create-movie.component';
+import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path:'movie/:id', component:MovieDetailComponent},
   {path:'reservations', component:ReserveComponent},
   {path:'movies-admin', component:AdminMoviesComponent},
+  {path:'create-movies', component:CreateMovieComponent},
+  {path:'edit-movie/:id', component:EditMovieComponent},
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
