@@ -9,10 +9,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-chair-reservation',
   templateUrl: './chair-reservation.component.html',
-  styleUrls: ['./chair-reservation.component.scss']
+  styleUrls: ['./chair-reservation.component.scss'],
+
 })
 export class ChairReservationComponent implements OnInit {
 
@@ -33,7 +35,8 @@ export class ChairReservationComponent implements OnInit {
   constructor(private apiService:ApiService,
      private tokenService:TokenService,
      private modal:NgbModal,
-     private router:Router) { }
+     private router:Router,
+     ) { }
 
   ngOnInit(): void {
     this.subs.push(this.apiService.getChairsByRoom(this.idRoom).subscribe(data =>{
@@ -121,7 +124,8 @@ seatClicked (rowSelected: string, columnSelected:number) {
   }
   this.price = this.movie.price * this.rowsSelected.length;
 }
-onReserve() {
+
+onReserve(spinner:string) {
   let reserve = {
     email: this.tokenService.getEmail(),
     idMovie: this.movie.id,
@@ -134,12 +138,14 @@ onReserve() {
 
 
 if(this.userId!=null){
+
   this.subs.push(
     this.apiService.updateReservation(reserve).subscribe(
       (data)=>{
 
         console.log(data);
       },(err)=>{
+
         this.router.navigateByUrl('/RefrshComponent',
         {skipLocationChange: true}).then(()=> this.router.navigate(["reservations"]));
         this.alertSuccess(err.error.text);

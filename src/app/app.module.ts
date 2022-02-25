@@ -29,6 +29,9 @@ import {MatTooltipModule } from '@angular/material/tooltip';
 import { CreateMovieComponent } from './components/create-movie/create-movie.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
+import { CreatePresentationComponent } from './components/admin-presentations/create-presentation/create-presentation.component';
+import { NgImageSliderModule } from 'ng-image-slider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +47,9 @@ import { EditMovieComponent } from './components/edit-movie/edit-movie.component
     ReserveComponent,
     ReservationDetailComponent,
     CreateMovieComponent,
-    EditMovieComponent
+    EditMovieComponent,
+    CreatePresentationComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -62,7 +67,9 @@ import { EditMovieComponent } from './components/edit-movie/edit-movie.component
     MatMenuModule,
     NgbModule,
     SweetAlert2Module.forRoot(),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgImageSliderModule,
+
 
 
 

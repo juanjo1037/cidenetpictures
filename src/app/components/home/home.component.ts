@@ -15,18 +15,22 @@ export class HomeComponent implements OnInit {
   isLogged=false;
   email:string;
   sticky = false;
-
+  currentTime:Date=new Date();
+  hora:string;
   subs: Subscription[] = [];
   billboard: Movies[] = [];
   comingSoon: Movies[] = [];
   topRated: Movies[] = [];
 
 
-  sliderConfig = {
+  slider1Config = {
     slidesToShow: 8,
     slidesToScroll: 2,
     arrows: true,
     autoplay: false
+  };
+  slider2Config = {
+
   };
 
   @ViewChild('stickHeader') header: ElementRef;
@@ -39,13 +43,21 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdmin=this.tokenService.isAdmin();
+
     this.isLogged=this.tokenService.isLogged();
     this.email=this.tokenService.getEmail();
     this.subs.push(this.movie.getMoviesOnBillboard().subscribe(data => {
       this.billboard = data;
       this.headerBGUrl = this.billboard[0].backDropImg;
     }));
-    this.subs.push(this.movie.getMoviesComingSoon().subscribe(data => this.comingSoon = data));
+    this.subs.push(this.movie.getMoviesComingSoon().subscribe(data => {this.comingSoon = data
+    this.slider2Config={
+      slidesToShow: this.comingSoon.length,
+      slidesToScroll: 2,
+      arrows: true,
+      autoplay: false
+    }
+  }));
     this.subs.push(this.movie.getMoviesByGenre("comedia").subscribe(data => this.topRated = data));
 
 

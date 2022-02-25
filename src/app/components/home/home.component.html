@@ -43,7 +43,7 @@
             <a  id="dropdownBasic1" ngbDropdownToggle>Administrar</a>
             <div ngbDropdownMenu class ="custom-dropdown" aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem routerLink="/movies-admin">Peliculas</button>
-              <button ngbDropdownItem>Presentaciones</button>
+              <button ngbDropdownItem routerLink="/presentations-admin">Presentaciones</button>
               <button ngbDropdownItem>Salas</button>
             </div>
           </div>
@@ -93,17 +93,14 @@
     <app-slider
       title="Cartelera"
       [movies]="billboard"
-      [sliderConfig]="sliderConfig"
+      [sliderConfig]="slider1Config"
+
     ></app-slider>
     <app-slider
       title="Proximamente"
       [movies]="comingSoon"
-      [sliderConfig]="sliderConfig"
+      [sliderConfig]="slider2Config"
     ></app-slider>
-    <app-slider
-      title="Destacadas en cartelera"
-      [movies]="topRated"
-      [sliderConfig]="sliderConfig"
-    ></app-slider>
+
   </div>
 </div>

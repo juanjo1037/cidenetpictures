@@ -4,7 +4,7 @@
   <div class="movie__images">
     <div class="thumbnails">
       <ngx-slick-carousel [config]="sliderConfig" class="carousel">
-        <div class="slick-item" *ngFor="let m of movies" >
+        <div class="slick-item" *ngFor="let m of movies" ngxSlickItem>
           <img src="{{m?.image}}" alt="{{m.title}}" class="poster" (click)="selectedMovie(m.id)">
         </div>
       </ngx-slick-carousel>

@@ -66,7 +66,16 @@ url= environment.url;
     }
     return this.http.get<Presentation[]>(address, options);
   }
+  getPresentations(){
+    let address = this.url + "presentation"
+    let options= {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
 
+    }
+    return this.http.get<Presentation[]>(address, options);
+  }
   getChairsByRoom(idRoom:number){
     let address = this.url + "presentation/chair/"+idRoom;
     let options= {

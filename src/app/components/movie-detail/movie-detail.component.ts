@@ -15,6 +15,7 @@ import { TokenService } from 'src/app/services/token/token.service';
 })
 export class MovieDetailComponent implements OnInit {
   id: any;
+
   movie:Movies;
   presentations:Presentation[]=[]
   isAdmin: boolean=false;
@@ -26,8 +27,9 @@ export class MovieDetailComponent implements OnInit {
   posterBGUrl: string;
   schedule:String;
   roomId:number;
-
-
+  currentTime:Date= new Date();
+  hour:string;
+  formatPrice:string;
   constructor(private moviesService:MoviesService,
     private activatedRoute: ActivatedRoute,
     private router:Router,
@@ -45,6 +47,7 @@ export class MovieDetailComponent implements OnInit {
       }
 
   ngOnInit(): void {
+    this.hour= this.currentTime.getHours().toString();
     this.isAdmin= this.tokenService.isAdmin();
     this.isLogged=this.tokenService.isLogged();
     this.activatedRoute.params.subscribe(params => {
@@ -56,10 +59,27 @@ export class MovieDetailComponent implements OnInit {
             this.movie = res;
             this.headerBGUrl=res.backDropImg;
             this.posterBGUrl=res.image;
+            this.formatPrice=this.formatNumber(this.movie.price);
 
             this.apiService.getPresentationByMovie(this.movie.id).subscribe(
               data=> {
-                this.presentations=data;
+
+                for(let presentation of data){
+                    let schedule=presentation.id.schedule;
+                    let scheduleNum= 0;
+                    schedule=schedule.slice(0,2);
+                    if(schedule!="12"){
+                    scheduleNum=  Number(schedule)+12;
+
+                    }else
+                    scheduleNum= Number(schedule);
+
+
+                   if(scheduleNum>Number(this.hour)){
+                    this.presentations.push(presentation);
+                   }
+                }
+
 
               });
           },
@@ -73,6 +93,10 @@ export class MovieDetailComponent implements OnInit {
     this.roomId=roomId;
 
   }
+  formatNumber(number) {
+        return new Intl.NumberFormat("ES-CO", { style: 'currency', currency: 'COP', maximumSignificantDigits: 3 }).format(number)
+    }
+
   presentationsIsEmpty():boolean{
     if (this.presentations.length>0){
       return true

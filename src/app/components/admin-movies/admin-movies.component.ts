@@ -67,6 +67,8 @@ subs: Subscription[] = [];
       if(err.error.text=="pelicula eliminada")
      {
        this.alertSuccess(err.error.text);
+       this.router.navigateByUrl('/RefrshComponent',
+       {skipLocationChange: true}).then(()=> this.router.navigate(["movies-admin"]));
      }
      else
        this.alertError(err.error.text);

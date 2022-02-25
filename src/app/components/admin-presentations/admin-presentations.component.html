@@ -1,1 +1,130 @@
-<p>admin-presentations works!</p>
+<div class="container-custom">
+    <div
+      class="header__main"
+      id="stickyHeader"
+      [class.sticky]="sticky"
+      #stickHeader
+    >
+      <div class="header__left">
+        <a routerLink="/">
+          <img src="../assets/cidenetPicTransparent.png" alt="logo" />
+        </a>
+        <ul>
+          <li ><a href="">Inicio</a></li>
+          <li><a href="movies">Peliculas</a></li>
+          <li  *ngIf="isLogged"><a href="reservations">Mis Reservas</a></li>
+          <li *ngIf="isLogged && isAdmin" class="active">
+            <div ngbDropdown class="d-inline-block ">
+              <a  id="dropdownBasic1" ngbDropdownToggle>Administrar</a>
+              <div ngbDropdownMenu class ="custom-dropdown" aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem routerLink="/movies-admin">Peliculas</button>
+                <button ngbDropdownItem>Presentaciones</button>
+                <button ngbDropdownItem>Salas</button>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="header__right">
+        <ul>
+          <li>
+            <a *ngIf="isAdmin">Bienvenido Admin</a
+            ><a *ngIf="!isAdmin">Bienvenido {{ email }}</a>
+          </li>
+          <li>
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Icon-button with a menu"
+
+            >
+              <mat-icon>account_circle</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <div class="menu__container">
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngIf="isLogged">
+                  <span>{{ email }}</span>
+                </button>
+
+                <button mat-menu-item>
+                  <mat-icon *ngIf="!isLogged">input</mat-icon>
+                  <span *ngIf="!isLogged" routerLink="/login"
+                    >Iniciar Sesión</span
+                  >
+                  <mat-icon *ngIf="isLogged">exit_to_app</mat-icon>
+                  <span *ngIf="isLogged" (click)="onLogOut()"
+                    >Cerrar sesión
+                  </span>
+                </button>
+              </mat-menu>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="movies-table mt-5">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="card" >
+            <div class="card-body text-center">
+              <span class="title">LISTADO DE PRESENTACIONES</span>
+              <button class="btn btn-success new-movie" (click)="open(content)">Nuevo</button>
+              <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h1 class="modal-title" id="modal-basic-title">Crear Presentación</h1>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                <app-create-presentation></app-create-presentation>
+
+                </div>
+
+              </ng-template>
+
+
+              <table class="table table-striped mt-4">
+                <thead>
+                  <tr>
+                    <th scope="col">Sala</th>
+                    <th scope="col">Horario</th>
+                    <th scope="col">Pelicula</th>
+                    <th scope="col">Editar</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let presentation of presentations">
+                    <td>{{presentation.id.roomId}}</td>
+                    <td>{{presentation.id.schedule}}</td>
+                    <td>{{presentation.movie.title}}</td>
+                    <td class="edit" (click)="open(contents)"><mat-icon  >edit</mat-icon></td>
+                    <ng-template #contents let-c="close" let-d="dismiss">
+                      <div class="modal-header">
+                        <h1 class="modal-title" id="modal-basic-title">Crear Presentación</h1>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                      <app-create-presentation [presentation]="presentation"></app-create-presentation>
+                      </div>
+
+                    </ng-template>
+                  </tr>
+
+
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+

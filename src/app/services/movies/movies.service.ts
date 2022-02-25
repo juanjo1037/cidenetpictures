@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Room } from 'src/app/models/chair';
 import { Movies } from 'src/app/models/movies';
-import { Movie } from 'src/app/models/presentation.interface';
+import { Movie, Presentation } from 'src/app/models/presentation.interface';
 import { environment } from 'src/environments/environment';
 
 
@@ -66,6 +67,15 @@ export class MoviesService {
     }
     return this.http.get<Movies[]>(address, options);
   }
+  getAllRooms():Observable<Room[]>{
+    let address=this.url+"presentation/room"
+    let options={
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    }
+    return this.http.get<Room[]>(address,options);
+  }
   deleteMovie(id :number): Observable<any>{
     let address = this.url+"movie/"+id;
     let options= {
@@ -82,5 +92,11 @@ export class MoviesService {
   }
   updateMovie(movieForm:Movies,id:number):Observable<any>{
     return this.http.put<any>(this.url+'movie/'+id , movieForm);
+  }
+  createPresentation(presentation):Observable<any>{
+    return this.http.post<any>(this.url+'presentation',presentation);
+  }
+  updatePresentation(presentation):Observable<any>{
+    return this.http.put<any>(this.url+'presentation',presentation);
   }
 }

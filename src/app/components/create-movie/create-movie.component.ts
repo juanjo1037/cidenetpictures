@@ -63,6 +63,7 @@ export class CreateMovieComponent implements OnInit {
       'Documental',
       'Drama',
       'Fantasía',
+      'Misterio',
       'Musical',
       'Suspenso',
       'Terror',
@@ -165,7 +166,7 @@ export class CreateMovieComponent implements OnInit {
   }
   onCreate(movieForm: Movies) {
     if (this.movieForm.valid) {
-      movieForm.genre = (this.movieForm.get('genre').value as []).join(',');
+      movieForm.genre = (this.movieForm.get('genre').value as []).join(', ');
       this.setCategory(movieForm);
       console.log(movieForm)
       this.movieService.createMovie(movieForm).subscribe(

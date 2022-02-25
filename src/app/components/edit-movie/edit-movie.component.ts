@@ -68,7 +68,7 @@ export class EditMovieComponent implements OnInit {
 
           this.movieForm.setValue({
             title: this.movie.title,
-            genre: this.movie.genre.split(','),
+            genre: this.movie.genre.split(', '),
             synopsis: this.movie.synopsis,
             image: this.movie.image,
             format: this.movie.format,
@@ -94,6 +94,7 @@ export class EditMovieComponent implements OnInit {
       'Documental',
       'Drama',
       'Fantasía',
+      'Misterio',
       'Musical',
       'Suspenso',
       'Terror',
@@ -189,7 +190,7 @@ export class EditMovieComponent implements OnInit {
   onEdit(movie: Movies) {
     if (this.movieForm.valid) {
       this.setCategory(movie);
-      movie.genre = (this.movieForm.get('genre').value as []).join(',');
+      movie.genre = (this.movieForm.get('genre').value as []).join(', ');
 
       this.movieService.updateMovie(movie, this.id).subscribe(
         (data) => {

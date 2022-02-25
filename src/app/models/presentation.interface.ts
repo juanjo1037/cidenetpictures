@@ -1,6 +1,7 @@
 export interface Presentation {
   id: Id;
   movie: Movie;
+  available:boolean;
 }
 export interface Id {
   roomId: number;

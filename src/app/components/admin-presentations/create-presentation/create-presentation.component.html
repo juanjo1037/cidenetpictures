@@ -1,0 +1,77 @@
+<div class="container mt-5 form">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body text-center form-container">
+          <h2 class="title">Gestionar presentación</h2>
+          <form class="mt-4" [formGroup]="presentationForm" (ngSubmit)="onCreate(presentationForm.value)">
+
+            <div class="mb-3">
+              <select
+                id="format"
+                class="form-control"
+                name="format"
+                placeholder="Formato"
+                formControlName="idRoom"
+                >
+                <option selected disabled value="" >Selecciona la sala</option >
+
+                <option  *ngFor="let room of rooms" value={{room.id}}>Sala {{room.id}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <select
+                id="format"
+                class="form-control"
+                name="format"
+                placeholder="Formato"
+                formControlName="schedule">
+                <option selected disabled value="">Selecciona el horario</option>
+                <option value="12:00pm">12:00pm</option>
+                <option value="03:00pm">03:00pm</option>
+                <option value="06:00pm">06:00pm</option>
+                <option value="09:00pm">09:00pm</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <select
+                id="format"
+                class="form-control"
+                name="format"
+                placeholder="Formato"
+                formControlName="idMovie">
+                <option selected disabled value="">Selecciona la pelicula</option>
+                <option *ngFor="let movie of movies" value={{movie.id}}>{{movie.title}}</option>
+              </select>
+            </div>
+              <div class="mb-3 radios">
+                <h3>¿Estará disponible la presentación?</h3>
+                <div class="form-check">
+                  <input checked class="form-check-input" type="radio" name="available" id="available" value=true formControlName="available">
+                  <label class="form-check-label" for="available">
+                    Disponible
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="available" id="available" value=false formControlName="available">
+                  <label class="form-check-label" for="available">
+                    No disponible
+                  </label>
+                </div>
+              </div>
+              <div class="mb-3">
+                <button routerLink="/presentations-admin" class="btn btn-secondary btn-lg
+                  float-start">ATRAS</button>
+                <button type="submit" class="btn btn-success btn-lg float-end ml-1"
+                [disabled]="presentationForm.invalid">
+                  ACEPTAR
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
