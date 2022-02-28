@@ -50,6 +50,7 @@ export class ReservationDetailComponent implements OnInit {
     idRoom: this.reservation.presentation.id.roomId,
     schedule: this.reservation.presentation.id.schedule
     }
+    this.modal.dismissAll();
     this.subs.push(
       this.apiService.deleteReservation(reserve).subscribe(
         (data)=>{
@@ -57,9 +58,9 @@ export class ReservationDetailComponent implements OnInit {
         },(err)=>{
           this.router.navigateByUrl('/RefrshComponent',
           {skipLocationChange: true}).then(()=> this.router.navigate(["reservations"]));
-          this.modal.dismissAll();  
+
           this.alertSuccess(err.error.text)
-          
+
         }
       )
     )

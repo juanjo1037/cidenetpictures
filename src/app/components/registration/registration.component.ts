@@ -74,7 +74,7 @@ export class RegistrationComponent implements OnInit {
   }
   onRegister(formSignup: SignUpI) {
     if (this.formSignup.valid) {
-
+      this.closeModal();
       this.authService.newUSer(formSignup).subscribe(
         (data) => {
           this.router.navigate(['/login']);

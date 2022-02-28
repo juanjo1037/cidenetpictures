@@ -1,0 +1,67 @@
+
+<div class="container-custom">
+<div class="header">
+<div
+class="header__main"
+id="stickyHeader"
+[class.sticky]="sticky"
+#stickHeader
+>
+<div class="header__left">
+  <a routerLink="/">
+    <img src="../assets/cidenetPicTransparent.png" alt="logo" />
+  </a>
+  <ul>
+    <li class="active"><a href="#">Inicio</a></li>
+    <li><a href="movies">Peliculas</a></li>
+    <li *ngIf="isLogged"><a routerLink="/reservations">Mis Reservas</a></li>
+    <li *ngIf="isLogged&&isAdmin">
+      <div ngbDropdown class="d-inline-block ">
+      <a  id="dropdownBasic1" ngbDropdownToggle>Administrar</a>
+      <div ngbDropdownMenu class ="custom-dropdown" aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem routerLink="/movies-admin">Peliculas</button>
+        <button ngbDropdownItem routerLink="/presentations-admin">Presentaciones</button>
+        <button ngbDropdownItem routerLink="/rooms-admin">Salas</button>
+      </div>
+    </div>
+  </li>
+  </ul>
+</div>
+
+<div class="header__right">
+  <ul>
+    <li>
+      <a *ngIf="isAdmin">Bienvenido Admin</a
+      ><a *ngIf="!isAdmin">Bienvenido {{ email }}</a>
+    </li>
+    <li>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Icon-button with a menu"
+      >
+        <mat-icon>account_circle</mat-icon>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <div class="menu__container">
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngIf="isLogged">
+          <span>{{ email }}</span>
+        </button>
+
+        <button mat-menu-item>
+          <mat-icon *ngIf="!isLogged">input</mat-icon>
+          <span *ngIf="!isLogged" routerLink="/login">Iniciar Sesión</span>
+          <mat-icon *ngIf="isLogged">exit_to_app</mat-icon>
+          <span *ngIf="isLogged" (click)="onLogOut()"
+            >Cerrar sesión
+          </span>
+        </button>
+      </mat-menu>
+    </div>
+    </li>
+  </ul>
+</div>
+</div>
+</div>
+</div>

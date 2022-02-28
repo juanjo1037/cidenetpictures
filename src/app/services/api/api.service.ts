@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Id, Reservation } from 'src/app/models/reservation.interface';
 import { environment } from 'src/environments/environment';
 import { Presentation } from 'src/app/models/presentation.interface';
-import { Chair } from 'src/app/models/chair';
+import { Chair, Room } from 'src/app/models/chair';
 import { ReservedChair } from 'src/app/models/reservedChair.interface';
 import { newReservation } from 'src/app/models/newReservation';
 @Injectable({
@@ -121,5 +121,18 @@ url= environment.url;
     };
 
     return this.http.get<ReservedChair[]>(address, options);
+  }
+  getRooms():Observable<Room[]>{
+    let address = this.url + "presentation/room"
+    let options= {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+
+    }
+    return this.http.get<Room[]>(address, options);
+  }
+  createRoom(newRoom:Room):Observable<any>{
+    return this.http.post<any>(this.url+'presentation/room',newRoom);
   }
 }

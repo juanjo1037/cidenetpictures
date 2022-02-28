@@ -4,20 +4,13 @@
   <main class="innerContainer">
       <div class="movie">
           <h3 class="movieTitle">{{movie.title}}</h3>
-          <div class="movieDetails">sala:{{idRoom}} - hora de funcion: {{schedule}} - duración:{{movie.duration}}</div>
+          <div class="movieDetails"><b>Sala:</b> {{idRoom}} <i style="color: rgba(240, 248, 255, 0);">--</i> <b>Hora de funcion:</b> {{schedule}} <i style="color: rgba(240, 248, 255, 0);">-</i> <b>Duración: </b> {{movie.duration}}</div>
           <div class="legend">
-            <span class=" freeSeat"><mat-icon>event_seat</mat-icon></span> LIBRE
-            <span class=" reservedSeat padding-left"><mat-icon>event_seat</mat-icon></span> OCUPADO
-            <span class=" selectedSeat padding-left"><mat-icon>event_seat</mat-icon></span> SELECCIONADO
+            <span class=" freeSeat"><mat-icon>event_seat</mat-icon></span> Libre
+            <span class=" reservedSeat padding-left"><mat-icon>event_seat</mat-icon></span> Ocupado
+            <span class=" selectedSeat padding-left"><mat-icon>event_seat</mat-icon></span> Seleccionado
         </div>
       </div>
-
-      <!-- Showing a static legend bar -->
-
-
-
-
-
       <!-- Generate the seating grid -->
       <div *ngFor="let row of rows">
           <span class="seat" *ngFor="let col of columns" [ngSwitch]="getStatus(row, col)">

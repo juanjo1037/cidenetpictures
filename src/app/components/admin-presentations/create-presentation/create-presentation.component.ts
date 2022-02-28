@@ -76,7 +76,7 @@ closeModal(){
 
         },
         (err) => {
-          console.log(err);
+
 
           if (err.status == 201) {
             this.closeModal()
@@ -92,10 +92,10 @@ closeModal(){
       this.moviesService.updatePresentation(presentation).subscribe(
         (data) => {
 
-          console.log(data);
 
+          this.closeModal();
           if (data.statusCodeValue == 200) {
-            this.closeModal()
+
             this.alertSuccess(data.body);
             this.router.navigateByUrl('/RefrshComponent',
            {skipLocationChange: true}).then(()=> this.router.navigate(["presentations-admin"]));

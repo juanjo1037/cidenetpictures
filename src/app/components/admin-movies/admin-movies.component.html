@@ -19,7 +19,7 @@
             <div ngbDropdownMenu class ="custom-dropdown" aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem>Peliculas</button>
               <button ngbDropdownItem routerLink="/presentations-admin">Presentaciones</button>
-              <button ngbDropdownItem>Salas</button>
+              <button ngbDropdownItem routerLink="/rooms-admin">Salas</button>
             </div>
           </div>
         </li>
@@ -94,8 +94,10 @@
                   <td>{{movie.duration}}</td>
                   <td>{{movie.format}}</td>
                   <td>{{movie.price}}</td>
-                  <td>{{movie.billboard}}</td>
-                  <td>{{movie.comingSoon}}</td>
+                  <td *ngIf="movie.billboard" style="color: green;"><mat-icon>check</mat-icon></td>
+                  <td *ngIf="!movie.billboard" style="color: red;"><mat-icon>close</mat-icon></td>
+                  <td *ngIf="movie.comingSoon" style="color: green;"><mat-icon>check</mat-icon></td>
+                  <td *ngIf="!movie.comingSoon" style="color: red;"><mat-icon>close</mat-icon></td>
                   <td class="edit"><mat-icon (click)="selectedMovie(movie.id)">edit</mat-icon></td>
                   <td class="delete" (click)="open(content)"><mat-icon>delete</mat-icon></td>
 

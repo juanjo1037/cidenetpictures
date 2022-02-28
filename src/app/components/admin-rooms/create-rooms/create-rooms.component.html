@@ -1,0 +1,52 @@
+<div class="container mt-5 form">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body text-center form-container">
+          <h2 class="title">Gestionar Salas</h2>
+          <form class="mt-4" [formGroup]="roomForm" (ngSubmit)="onCreate(roomForm.value)">
+
+            <div class="mb-3">
+              <input
+                id="rowsNumber"
+                type="number"
+                min="1"
+                max="10"
+                class="form-control"
+                name="format"
+                placeholder="Cantidad de filas"
+                formControlName="rowsNumber"
+                />
+
+
+            </div>
+            <div class="mb-3">
+              <input
+              id="columnsNumber"
+              type="number"
+              min="1"
+              max="10"
+              class="form-control"
+              name="columnsNumber"
+              placeholder="Cantidad de columnas"
+              formControlName="columnsNumber"
+              />
+            </div>
+
+
+
+              <div class="mb-3">
+                <button routerLink="/presentations-admin" class="btn btn-secondary btn-lg
+                  float-start">ATRAS</button>
+                <button type="submit" class="btn btn-success btn-lg float-end ml-1"
+                [disabled]="!roomForm.valid">
+                  ACEPTAR
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

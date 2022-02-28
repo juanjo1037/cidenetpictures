@@ -1,6 +1,8 @@
+
 <div class="container-custom">
 
   <div class="header">
+
     <!--BANNER AREA-->
     <div
       class="header__banner"
@@ -24,7 +26,7 @@
     <!--BANNER ENDS HERE-->
 
     <!--MAIN AREA-->
-    <div
+     <div
       class="header__main"
       id="stickyHeader"
       [class.sticky]="sticky"
@@ -44,7 +46,7 @@
             <div ngbDropdownMenu class ="custom-dropdown" aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem routerLink="/movies-admin">Peliculas</button>
               <button ngbDropdownItem routerLink="/presentations-admin">Presentaciones</button>
-              <button ngbDropdownItem>Salas</button>
+              <button ngbDropdownItem routerLink="/rooms-admin">Salas</button>
             </div>
           </div>
         </li>
@@ -53,10 +55,7 @@
 
       <div class="header__right">
         <ul>
-          <li>
-            <a *ngIf="isAdmin">Bienvenido Admin</a
-            ><a *ngIf="!isAdmin">Bienvenido {{ email }}</a>
-          </li>
+
           <li>
             <button
               mat-icon-button
@@ -89,7 +88,7 @@
     <!--HEADER MAIN ENDS HERE-->
   </div>
 
-  <div class="body" style="margin-top: 28.6rem">
+  <div class="body" style="margin-top: 26rem">
     <app-slider
       title="Cartelera"
       [movies]="billboard"

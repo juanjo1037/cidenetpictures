@@ -21,7 +21,7 @@
               <div ngbDropdownMenu class ="custom-dropdown" aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem routerLink="/movies-admin">Peliculas</button>
                 <button ngbDropdownItem routerLink="/presentations-admin">Presentaciones</button>
-                <button ngbDropdownItem>Salas</button>
+                <button ngbDropdownItem routerLink="/rooms-admin">Salas</button>
               </div>
             </div>
           </li>
@@ -117,7 +117,7 @@
         (click)="onSelect(pres.id.schedule, pres.id.roomId)">{{pres.id.schedule}}</option>
 
       </select>
-      <button *ngIf="presentationsIsEmpty()&& isLogged" class="reservation__button" (click)=open(content)>Reservar</button>
+      <button *ngIf="presentationsIsEmpty()&& isLogged" class="reservation__button" (click)=open(content) [disabled]="scheduleSelected">Reservar</button>
 
       <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header " style="margin-bottom:0;">
@@ -137,3 +137,4 @@
 
   </div>
   </div>
+</div>

@@ -30,6 +30,7 @@ export class MovieDetailComponent implements OnInit {
   currentTime:Date= new Date();
   hour:string;
   formatPrice:string;
+  scheduleSelected=true;
   constructor(private moviesService:MoviesService,
     private activatedRoute: ActivatedRoute,
     private router:Router,
@@ -91,7 +92,7 @@ export class MovieDetailComponent implements OnInit {
   onSelect(schedule:String, roomId:number){
     this.schedule=schedule;
     this.roomId=roomId;
-
+    this.scheduleSelected=false;
   }
   formatNumber(number) {
         return new Intl.NumberFormat("ES-CO", { style: 'currency', currency: 'COP', maximumSignificantDigits: 3 }).format(number)

@@ -14,6 +14,8 @@ import { ReserveComponent } from './components/reserve/reserve.component';
 import { CreatePresentationComponent } from './components/admin-presentations/create-presentation/create-presentation.component';
 import { MovieGuardService as guard } from './services/guards/movie-guard.service';
 import { LoginGuard as lGuard } from './services/guards/login.guard';
+import { AdminRoomsComponent } from './components/admin-rooms/admin-rooms.component';
+import { CreateRoomsComponent } from './components/admin-rooms/create-rooms/create-rooms.component';
 const routes: Routes = [
   {
     path: '',
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path:'edit-movie/:id', component:EditMovieComponent, canActivate: [guard], data: { expectedRole: ['admin']}},
   {path: 'presentations-admin', component:AdminPresentationsComponent, canActivate: [guard], data: { expectedRole: ['admin']}},
   {path:'create-presentations', component:CreatePresentationComponent, canActivate: [guard], data: { expectedRole: ['admin']}},
+  {path:'rooms-admin', component:AdminRoomsComponent, canActivate: [guard], data: { expectedRole: ['admin']}},
+  {path:'create-rooms', component:CreateRoomsComponent, canActivate: [guard], data: { expectedRole: ['admin']}},
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

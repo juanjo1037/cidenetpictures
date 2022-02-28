@@ -1,0 +1,46 @@
+
+<div class="container-custom">
+ <app-header></app-header>
+  <div class="movies-table mt-5">
+    <div class="row" >
+      <div class="col-lg-8 offset-lg-2">
+        <div class="card" >
+          <div class="card-body text-center">
+            <span class="title">LISTADO DE SALAS</span>
+            <button class="btn btn-success new-movie" (click)="open(content)">Nuevo</button>
+
+            <ng-template #content let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h1 class="modal-title" id="modal-basic-title">Crear Sala</h1>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              <app-create-rooms></app-create-rooms>
+              </div>
+            </ng-template>
+
+            <table class="table table-striped mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Capacidad</th>
+                  <th scope="col">Número de filas</th>
+                  <th scope="col">Número de columnas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let room of rooms">
+                  <td>{{room.id}}</td>
+                  <td>{{room.capacity}}</td>
+                  <td>{{room.rowsNumber}}</td>
+                  <td>{{room.columnsNumber}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

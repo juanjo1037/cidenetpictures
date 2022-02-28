@@ -34,4 +34,8 @@ export class AdminPresentationsComponent implements OnInit {
 open(content){
   this.modal.open(content);
 }
+onLogOut(): void {
+  this.tokenService.logOut();
+  window.location.reload();
+}
 }

@@ -163,15 +163,15 @@ export class EditMovieComponent implements OnInit {
     }
   }
   onItemDeSelect(item: any) {
-    console.log('onItemDeSelect', item);
+
 
     var index = this.selectedItems.indexOf(item);
     if (index > -1) this.selectedItems.splice(index, 1);
-    console.log(this.movieForm.get('genre').value);
+
   }
   onItemSelect(item: any) {
     this.selectedItems.push(item);
-    console.log(this.movieForm.get('genre').value);
+
   }
   onLogOut(): void {
     this.tokenService.logOut();
@@ -194,10 +194,10 @@ export class EditMovieComponent implements OnInit {
 
       this.movieService.updateMovie(movie, this.id).subscribe(
         (data) => {
-          console.log(data);
+
         },
         (err) => {
-          console.log(err);
+
           this.router.navigate(['/movies-admin']);
           if (err.status == 200) {
             this.alertSuccess(err.error.text);

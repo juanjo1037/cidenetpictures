@@ -42,7 +42,7 @@
   max-width: 450px;
   height: 460px;
   margin-left: 50%;
-  background-color:  rgba(0,0,0,0.75);
+  background-color:  rgba(40,40,40,0.65);
   border-radius: 10px;
   box-sizing: border-box;
   transform: translateX(-50%);
@@ -118,10 +118,10 @@
 .login__footer{
 
   .sign__up{
-color: #737373;
+color: #ffffff;
 font-size: 16px;
     a{
-      color: #ffffff;
+      color: #06487a;
       font-size: 16px;
       text-decoration: none;
       &:hover{

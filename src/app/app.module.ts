@@ -7,7 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import { SliderComponent } from './components/slider/slider.component';
 import {SlickCarouselModule} from 'ngx-slick-carousel';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
@@ -31,6 +31,12 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
 import { CreatePresentationComponent } from './components/admin-presentations/create-presentation/create-presentation.component';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { AdminRoomsComponent } from './components/admin-rooms/admin-rooms.component';
+import { HeaderComponent } from './templates/header/header.component';
+import { SpinnerModule } from './components/spinner/spinner/spinner.module';
+import { spinnerInterceptorProvider } from './services/interceptors/spinner.interceptor';
+import { CreateRoomsComponent } from './components/admin-rooms/create-rooms/create-rooms.component';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +55,9 @@ import { NgImageSliderModule } from 'ng-image-slider';
     CreateMovieComponent,
     EditMovieComponent,
     CreatePresentationComponent,
+    AdminRoomsComponent,
+    HeaderComponent,
+    CreateRoomsComponent,
 
   ],
   imports: [
@@ -69,6 +78,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
     SweetAlert2Module.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     NgImageSliderModule,
+    SpinnerModule
 
 
 
@@ -77,7 +87,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 
 
   ],
-  providers: [interceptorProvider],
+  providers: [interceptorProvider, spinnerInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

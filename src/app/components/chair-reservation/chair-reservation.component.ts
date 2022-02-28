@@ -138,7 +138,7 @@ onReserve(spinner:string) {
 
 
 if(this.userId!=null){
-
+  this.closeModal();
   this.subs.push(
     this.apiService.updateReservation(reserve).subscribe(
       (data)=>{
@@ -149,12 +149,14 @@ if(this.userId!=null){
         this.router.navigateByUrl('/RefrshComponent',
         {skipLocationChange: true}).then(()=> this.router.navigate(["reservations"]));
         this.alertSuccess(err.error.text);
-        this.closeModal();
+
       }
     )
   )
 }else{
+  this.closeModal();
   this.subs.push(
+
     this.apiService.createReservation(reserve).subscribe(
       (data) => {
 

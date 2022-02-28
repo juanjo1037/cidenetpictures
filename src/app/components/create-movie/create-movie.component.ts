@@ -168,14 +168,14 @@ export class CreateMovieComponent implements OnInit {
     if (this.movieForm.valid) {
       movieForm.genre = (this.movieForm.get('genre').value as []).join(', ');
       this.setCategory(movieForm);
-      console.log(movieForm)
+
       this.movieService.createMovie(movieForm).subscribe(
         (data) => {
-          console.log(data);
+
 
         },
         (err) => {
-          console.log(err);
+
           this.router.navigate(['/admin-movies']);
           if (err.status == 201) {
             this.alertSuccess(err.error.text);
